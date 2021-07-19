@@ -22,7 +22,7 @@ namespace student.Repository
         private IStudentRepository repository = null;
         private List<StudentModel> studentList;
 
-        StudentRepositoryExcel()
+        public StudentRepositoryExcel()
         {
             desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // 바탕화면
             path = Path.Combine(desktopPath, "Excel.xlsx"); // 엑셀파일
@@ -49,17 +49,16 @@ namespace student.Repository
                 // 엑셀에 저장할 데이터
                 studentList = repository.GetAll();
 
-                foreach(StudentModel model in studentList)
+                for(int i = 0; i < studentList.Count(); i++)
                 {
-                    int index = model._Idx;
-                    workSheet.Cells[1 + index, 1] = index;
-                    workSheet.Cells[1 + index, 2] = model._Name;
-                    workSheet.Cells[1 + index, 3] = model._Kor;
-                    workSheet.Cells[1 + index, 4] = model._Eng;
-                    workSheet.Cells[1 + index, 5] = model._Math;
-                    workSheet.Cells[1 + index, 6] = model._Total;
-                    workSheet.Cells[1 + index, 7] = model._Average;
-                    workSheet.Cells[1 + index, 8] = model._Rank;
+                    workSheet.Cells[2 + i, 1] = studentList[i]._Idx;
+                    workSheet.Cells[2 + i, 2] = studentList[i]._Name;
+                    workSheet.Cells[2 + i, 3] = studentList[i]._Kor;
+                    workSheet.Cells[2 + i, 4] = studentList[i]._Eng;
+                    workSheet.Cells[2 + i, 5] = studentList[i]._Math;
+                    workSheet.Cells[2 + i, 6] = studentList[i]._Total;
+                    workSheet.Cells[2 + i, 7] = studentList[i]._Average;
+                    workSheet.Cells[2 + i, 8] = studentList[i]._Rank;
                 }
 
                 workSheet.Columns.AutoFit(); // 열 너비 자동 맞춤
@@ -76,7 +75,7 @@ namespace student.Repository
             }
 
         }
-
+        
         private void ReleaseObject(object obj)
         { 
             try { 
@@ -93,7 +92,7 @@ namespace student.Repository
                 GC.Collect(); // 가비지 수집 
             }
         }
-
+        
 
         public void Add(StudentModel model)
         {

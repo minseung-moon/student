@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using student.Repository;
+using System.Text.RegularExpressions;
 
 namespace student
 {
@@ -18,12 +19,14 @@ namespace student
     public partial class Form1 : Form
     {
         private IStudentRepository repository = null;
+        private StudentRepositoryExcel excel = null;
         private List<StudentModel> studentList;
         private int index = -1;
-        string name = null;
-        string kor = null;
-        string eng = null;
-        string math = null;
+        private string name = null;
+        private string kor = null;
+        private string eng = null;
+        private string math = null;
+        
 
         // 접속
         public Form1()
@@ -31,6 +34,7 @@ namespace student
             InitializeComponent();
 
             repository = new StudentRepository();
+            excel = new StudentRepositoryExcel();
         }
 
         // form 로드 이벤트
@@ -79,7 +83,7 @@ namespace student
                 // text box 데이터 확인
                 if (TextBoxValidate())
                 {
-                    MessageBox.Show("데이터를 입력해주세요");
+                    MessageBox.Show("데이터를 정확하게 입력해주세요");
                     return;
                 }
 
@@ -88,7 +92,7 @@ namespace student
                 InitTextBox();
                 ShowList();
             }
-            else MessageBox.Show("수정할 데이터를 입력해주세요.");
+            else MessageBox.Show("수정할 데이터를 정확하게 입력해주세요.");
         }
 
         // 그리드 뷰 클릭 이벤트
@@ -130,12 +134,28 @@ namespace student
             eng = tbeng.Text;
             math = tbmath.Text;
 
-            if (name == null || name == "" ||
-               kor == null || kor == "" ||
-               eng == null || eng == "" ||
-               math == null || math == "")
+            if(!Regex.IsMatch(name, @"^[가-힣]{2,10}$"))
+            {
+                tbname.Focus();
                 return true;
-            else return false;
+            }
+            if (!Regex.IsMatch(kor, @"^[0-9]{1,3}$") || (Convert.ToInt32(kor) < 0 || Convert.ToInt32(kor) > 100))
+            {
+                tbkor.Focus();
+                return true;
+            }
+            if(!Regex.IsMatch(eng, @"^[0-9]{1,3}$") || (Convert.ToInt32(eng) < 0 || Convert.ToInt32(eng) > 100))
+            {
+                tbeng.Focus();
+                return true;
+            }
+            if (!Regex.IsMatch(math, @"^[0-9]{1,3}$") || (Convert.ToInt32(math) < 0 || Convert.ToInt32(math) > 100))
+            {
+                tbmath.Focus();
+                return true;
+            }
+
+            return false;
         }
 
         // 그리드 뷰에 데이터 출력
@@ -156,5 +176,18 @@ namespace student
             dataGridView1.Columns[7].HeaderText = "등수";
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            excel.saveExcelFile();
+        }
+
+        private void End_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("종료하시겠습니까?", "종료", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            
+        }
     }
 }

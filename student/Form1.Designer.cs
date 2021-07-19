@@ -43,6 +43,8 @@ namespace student
             this.Add = new System.Windows.Forms.Button();
             this.Delete = new System.Windows.Forms.Button();
             this.Update = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.End = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +55,7 @@ namespace student
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(745, 255);
+            this.dataGridView1.Size = new System.Drawing.Size(797, 255);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -160,11 +162,33 @@ namespace student
             this.Update.UseVisualStyleBackColor = true;
             this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(533, 137);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Excel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // End
+            // 
+            this.End.Location = new System.Drawing.Point(670, 73);
+            this.End.Name = "End";
+            this.End.Size = new System.Drawing.Size(75, 23);
+            this.End.TabIndex = 13;
+            this.End.Text = "종료";
+            this.End.UseVisualStyleBackColor = true;
+            this.End.Click += new System.EventHandler(this.End_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(852, 450);
+            this.Controls.Add(this.End);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Update);
             this.Controls.Add(this.Delete);
             this.Controls.Add(this.Add);
@@ -200,6 +224,8 @@ namespace student
         private System.Windows.Forms.Button Add;
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.Button Update;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button End;
     }
 }
 
