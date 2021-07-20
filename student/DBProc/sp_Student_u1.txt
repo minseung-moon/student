@@ -1,0 +1,20 @@
+﻿USE [student]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Student_u1]    Script Date: 2021-07-20 오전 11:05:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_Student_u1]
+	@Name char(10),
+	@Kor int,
+	@Eng int,
+	@Math int,
+	@Idx int
+AS
+	UPDATE student SET name = @Name, kor = @kor, eng = @eng, math = @math WHERE idx = @Idx;

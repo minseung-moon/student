@@ -17,6 +17,7 @@ namespace student.Model
         private int total;
         private double average;
         private int rank;
+        private string result;
 
         public int _Idx { get { return idx; } set { idx = value; } }
         public string _Name { get { return name; } set { name = value; } }
@@ -27,5 +28,6 @@ namespace student.Model
         public int _Total { get { return total; } set { total = value; } }
         public double _Average { get { return average; } set { average = value; } }
         public int _Rank { get { return rank; } set { rank = value; } }
+        public string _Result { get { return result; } set { result = value; } }
     }
 }

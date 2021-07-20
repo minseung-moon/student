@@ -92,6 +92,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DBProc\sp_Student_u1.txt" />
+    <Content Include="DBProc\sp_Student_d1.txt" />
+    <Content Include="DBProc\sp_Student_s1.txt" />
+    <Content Include="DBProc\sp_Student_i1.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

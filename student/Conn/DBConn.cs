@@ -11,7 +11,7 @@ namespace student.Conn
     {
         private static string uid = ""; // DB 접속 아이디
         private static string password = ""; // DB 접속 비밀번호
-        private static string database = "";  // 사용할 DB 이름
+        private static string database = "student";  // 사용할 DB 이름
         private static string server = "";  // 서버 주소 -- sql 서버 접속시 사용한 주소
         private static SqlConnection conn = null;
 

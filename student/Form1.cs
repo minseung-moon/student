@@ -52,7 +52,6 @@ namespace student
                 MessageBox.Show("데이터를 입력해주세요");
                 return;
             }
-
             repository.Add(new StudentModel { _Idx = index, _Name = name, _Kor = Convert.ToInt32(kor), _Eng = Convert.ToInt32(eng), _Math = Convert.ToInt32(math) });
 
             // 초기화
@@ -166,21 +165,24 @@ namespace student
 
             studentList = repository.GetAll();
             dataGridView1.DataSource = studentList;
-            dataGridView1.Columns[0].HeaderText = "학생 번호";
-            dataGridView1.Columns[1].HeaderText = "학생 성명";
+            dataGridView1.Columns[0].HeaderText = "번호";
+            dataGridView1.Columns[1].HeaderText = "성명";
             dataGridView1.Columns[2].HeaderText = "국어";
             dataGridView1.Columns[3].HeaderText = "영어";
             dataGridView1.Columns[4].HeaderText = "수학";
             dataGridView1.Columns[5].HeaderText = "총합";
             dataGridView1.Columns[6].HeaderText = "평균";
             dataGridView1.Columns[7].HeaderText = "등수";
+            dataGridView1.Columns[8].HeaderText = "결과";
         }
 
+        // 엑셀 저장 이벤트
         private void button1_Click_1(object sender, EventArgs e)
         {
             excel.saveExcelFile();
         }
 
+        // 프로그램 종료 이벤트
         private void End_Click(object sender, EventArgs e)
         {
             if(MessageBox.Show("종료하시겠습니까?", "종료", MessageBoxButtons.YesNo) == DialogResult.Yes)

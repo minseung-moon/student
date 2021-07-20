@@ -1,0 +1,19 @@
+﻿USE [student]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Student_i1]    Script Date: 2021-07-20 오전 11:03:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_Student_i1]
+	@Name NVARCHAR(10),
+	@Kor INT,
+	@Eng INT,
+	@Math INT
+AS
+	INSERT INTO student(name, kor, eng, math) Values(@Name, @Kor, @Eng, @Math);

@@ -1,0 +1,27 @@
+﻿USE [student]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Student_s1]    Script Date: 2021-07-20 오전 11:04:03 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_Student_s1]
+AS
+Begin
+	-- DECLARE @tempnum int;
+	SELECT *, 
+		(kor + eng + math) AS total,
+		CONVERT(NUMERIC(12,2) ,(kor + eng + math)/3.0) AS average,
+		(SELECT COUNT(*) + 1 FROM student s2 WHERE (s2.kor + s2.eng + s2.math) > (s1.kor + s1.eng + s1.math)) AS Rank,
+		
+		CASE
+			WHEN (kor < 40 OR eng < 40 OR math < 40 OR (kor + eng + math)/3 < 70) THEN '불합격'
+			ELSE '합격'
+		END AS "결과"
+FROM student s1 ORDER BY idx ASC;
+End

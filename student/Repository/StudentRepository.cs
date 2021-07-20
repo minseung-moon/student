@@ -25,7 +25,7 @@ namespace student.Repository
 
         public void Add(StudentModel model)
         {
-            string sql = "INSERT INTO sutdent VALUES('" + model._Name + "'," + model._Kor + "," + model._Eng + "," + model._Math + ");";
+            string sql = "EXEC sp_Student_i1 '" + model._Name + "'," + model._Kor + "," + model._Eng + "," + model._Math + " ";
             cmd.CommandText = sql;
             conn.Open();
             cmd.ExecuteNonQuery();
@@ -36,7 +36,7 @@ namespace student.Repository
 
         public void DeleteByIdx(int index)
         {
-            string sql = "DELETE FROM sutdent WHERE idx = " + index + ";";
+            string sql = "EXEC sp_Student_d1 " + index + "";
             cmd.CommandText = sql;
             conn.Open();
             cmd.ExecuteNonQuery();
@@ -44,12 +44,12 @@ namespace student.Repository
             conn.Close();
         }
 
+        // 데이터 조회
         public List<StudentModel> GetAll()
         {
             studentList = new List<StudentModel>();
 
-            // string sql = "SELECT * FROM sutdent ORDER BY idx ASC";
-            string sql = "SELECT *, (kor + eng + math) AS total, CONVERT(NUMERIC(12,2) , (kor + eng + math)/3.0) AS average, (SELECT COUNT(*) + 1 FROM sutdent s2 WHERE (s2.kor + s2.eng + s2.math) > (s1.kor + s1.eng + s1.math)) AS rank FROM sutdent s1 ORDER BY idx ASC;";
+            string sql = "EXEC sp_Student_s1";
             cmd.CommandText = sql;
             conn.Open();
 
@@ -58,7 +58,8 @@ namespace student.Repository
             {
                 while (SR.Read())
                 {
-                    StudentModel model = new StudentModel { _Idx = (int)SR[0], _Name = (string)SR[1], _Kor = (int)SR[2], _Eng = (int)SR[3], _Math = (int)SR[4], _Total = (int)SR[5], _Average = Convert.ToDouble(SR[6]), _Rank = (int)SR[7] };
+                    StudentModel model = new StudentModel { _Idx = (int)SR[0], _Name = (string)SR[1], _Kor = (int)SR[2], _Eng = (int)SR[3], _Math = (int)SR[4], _Total = (int)SR[5], _Average = Convert.ToDouble(SR[6]), _Rank = (int)SR[7], _Result = (string)SR[8] };
+                    // model._Result = (model._Average < 70.0 || model._Kor < 40 || model._Eng < 40 || model._Math < 40) ? "불합격" : "합격";
                     studentList.Add(model);
                 }
                 SR.Close();
@@ -70,7 +71,7 @@ namespace student.Repository
 
         public void UpdateByIdx(StudentModel model)
         {
-            string sql = "UPDATE sutdent SET name = '" + model._Name + "', kor = " + model._Kor + ", eng = " + model._Eng + ", math = " + model._Math + " WHERE idx = " + model._Idx + ";";
+            string sql = "EXEC sp_Student_u1 '" + model._Name + "', " + model._Kor + ",  " + model._Eng + ", " + model._Math + ", " + model._Idx + "";
             cmd.CommandText = sql;
             conn.Open();
             cmd.ExecuteNonQuery();
